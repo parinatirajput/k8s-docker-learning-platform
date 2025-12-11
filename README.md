@@ -11,7 +11,6 @@ Simple Web UI using Flask where user can run Docker Commands for practice purpos
 
 ## Tech Stack
 
-
 - **Frontend:** e.g., HTML, CSS
 - **Backend:** e.g., Flask
 - **Other Tools:** ECR, AWS, etc.
