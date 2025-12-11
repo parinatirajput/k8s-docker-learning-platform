@@ -12,7 +12,7 @@ pipeline {
 
         stage("Clone Repo") {
             steps {
-                git branch: 'main',
+                git branch: 'development',
                     url: 'https://github.com/parinatirajput/k8s-docker-learning-platform.git',
                     credentialsId: 'github-pat'
             }  
