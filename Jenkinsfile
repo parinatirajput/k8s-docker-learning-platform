@@ -53,7 +53,7 @@ pipeline {
                         --stack-name flask-app-stack \
                         --capabilities CAPABILITY_NAMED_IAM \
                         --parameter-overrides \
-                            KeyName=your-keypair \
+                            KeyName=practice \
                             DockerImage=${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}
                     """
                 }
