@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Command Runner UI</title>
+    <style>
+        body { font-family: Arial; padding: 30px; }
+        input[type=text] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            background: black;
+            color: lime;
+            font-family: monospace;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #1976D2;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover { background: #004C9A; }
+    </style>
+</head>
+
+<body>
+
+<h2>Run kubectl & docker commands (Python3 Flask App)</h2>
+
+<form method="POST" action="/run">
+    <input type="text" name="command" placeholder="Enter command (e.g., kubectl get pods)" required>
+    <button type="submit">Run Command</button>
+</form>
+
+<h3>Output:</h3>
+<textarea readonly>{{ output }}</textarea>
+
+</body>
+</html>
+
