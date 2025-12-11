@@ -1,0 +1,55 @@
+<!-- frontend/index.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Docker & Kubernetes Learning</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <section>
+    <textarea id="output" class="box">Output will be shown here ......</textarea>
+    <h1>Docker</h1>
+    <p><em>Empowering App Development for Developers</em></p>
+
+    <div><button class="btn" onclick="listImages()"> View All Images </button></div>
+    <div><button class="btn" onclick="listContainers()"> View All Containers </button></div>
+
+    <div class="form">
+      <label for="cmdName">Name</label>
+      <input type="text" id="cmdName" placeholder="name" />
+
+      <label for="cmdImage">Image</label>
+      <input type="text" id="cmdImage" placeholder="nginx:latest" />
+
+      <button onclick="runDocker()">Run Container</button>
+    </div>
+
+    <div class="kubernetes">
+      <h3>KUBERNETES</h3>
+      <input id="kube_cmd" class="box2" placeholder="e.g. get pods or create deployment" />
+      <div>
+        <button onclick="k8sList('pods')">Get Pods</button>
+        <button onclick="k8sList('deployments')">Get Deployments</button>
+      </div>
+
+      <div style="margin-top:10px;">
+        <input id="dep_name" placeholder="deployment-name" />
+        <input id="dep_image" placeholder="image" />
+        <input id="dep_replicas" type="number" value="1" />
+        <button onclick="createDeployment()">Create Deployment</button>
+        <button onclick="exposeDeployment()">Expose (NodePort)</button>
+      </div>
+
+      <div style="margin-top:10px;">
+        <input id="scale_name" placeholder="name" />
+        <input id="scale_replicas" type="number" value="1" />
+        <button onclick="scaleDeployment()">Scale</button>
+        <button onclick="deleteAll()">Delete All</button>
+      </div>
+    </div>
+
+  </section>
+</body>
+</html>
