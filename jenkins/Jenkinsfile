@@ -1,0 +1,36 @@
+pipeline {
+  agent any
+  environment {
+    ECR_REG = "<AWS_ACCOUNT>.dkr.ecr.<REGION>.amazonaws.com/k8s-learning-webapp"
+    IMAGE_TAG = "${env.BUILD_ID}"
+  }
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+    stage('Build image') {
+      steps {
+        sh "docker build -t ${ECR_REG}:${IMAGE_TAG} -f deployment/Dockerfile ."
+      }
+    }
+    stage('Push to ECR') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'aws-creds', usernameVariable:'AWS_USER', passwordVariable:'AWS_SECRET')]) {
+          sh '''
+            aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin ${ECR_REG%/*}
+            docker push ${ECR_REG}:${IMAGE_TAG}
+          '''
+        }
+      }
+    }
+    stage('Deploy to EKS') {
+      steps {
+        sh """
+          kubectl set image deployment/k8s-learning-webapp k8s-learning-webapp=${ECR_REG}:${IMAGE_TAG} -n default || kubectl apply -f deployment/k8s-deployment.yaml
+          kubectl apply -f deployment/k8s-service.yaml
+          kubectl apply -f deployment/rbac.yaml
+        """
+      }
+    }
+  }
+}
