@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION = "ap-south-1"
+        AWS_REGION = "us-east-1"
         ECR_REGISTRY = "850601428312.dkr.ecr.us-east-1.amazonaws.com"
         ECR_REPO = "flask-runner"
         IMAGE_TAG = "latest"
