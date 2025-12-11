@@ -28,7 +28,7 @@ pipeline {
 
         stage("Push to ECR") {
             steps {
-                withAWS(credentials:'5da8ecb9-44cf-437e-8eba-a1fff600837f', region: "${AWS_REGION}") {
+                withAWS(credentials:'aws-creds', region: "${AWS_REGION}") {
 
                     // Login to ECR
                     sh """
@@ -46,7 +46,7 @@ pipeline {
 
         stage("Deploy with CloudFormation") {
             steps {
-                withAWS(credentials:'5da8ecb9-44cf-437e-8eba-a1fff600837f', region:"${AWS_REGION}") {
+                withAWS(credentials:'aws-creds', region:"${AWS_REGION}") {
                     sh """
                     aws cloudformation deploy \
                         --template-file cloudformation-app.yaml \
