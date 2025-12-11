@@ -3,8 +3,6 @@
 
 Simple Web UI using Flask where user can run Docker Commands for practice purpose 
 
-
-
 ## Features
 
 - Feature 1: Run Docker command
