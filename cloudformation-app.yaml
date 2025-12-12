@@ -61,7 +61,8 @@ Resources:
           systemctl enable docker
 
           # Login to ECR
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${DockerImage%/*}
+          #aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${DockerImage%/*}
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECRRegistry}
 
           # Pull and run Docker image
           docker stop flask-app || true

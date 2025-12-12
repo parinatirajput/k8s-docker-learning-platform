@@ -49,13 +49,14 @@ pipeline {
                 withAWS(credentials:'aws-creds', region:"${AWS_REGION}") {
                     sh """
                     aws cloudformation deploy \
-                        --template-file cloudformation-app.yaml \
-                        --stack-name flask-app-stack \
-                        --capabilities CAPABILITY_NAMED_IAM \
-                        --parameter-overrides \
-                            KeyName=practice \
-                            DockerImage=${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}
-                    """
+                     --template-file cloudformation-app.yaml \
+                     --stack-name flask-app-stack \
+                     --capabilities CAPABILITY_NAMED_IAM \
+                     --parameter-overrides \
+                    KeyName=practice \
+                    DockerImage=850601428312.dkr.ecr.us-east-1.amazonaws.com/flask-runner:latest \
+                    ECRRegistry=850601428312.dkr.ecr.us-east-1.amazonaws.com 
+                   """
                 }
             }
         }
