@@ -5,7 +5,6 @@ Simple Web UI using Flask where user can run Docker Commands for practice purpos
 
 ## Features
 
-- Feature 1: Run Docker command
 - Feature 2: Client doesnot need docker installation.
 
 
