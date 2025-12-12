@@ -61,13 +61,13 @@ EC2InstanceProfile:
           systemctl enable docker
 
          # Login to ECR
-         aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${DockerImage%/*}
+          aws ecr get-login-password --region ${AWS_REGION} | docker login --username Jenkins2  --password-stdin ${DockerImage%/*}
 
-         # Pull and run Docker image
-         docker stop flask-app || true
-         docker rm flask-app || true
-         docker pull ${DockerImage}
-         docker run -d --name flask-app -p 5000:5000 ${DockerImage}
+          # Pull and run Docker image
+          docker stop flask-app || true
+          docker rm flask-app || true
+          docker pull ${DockerImage}
+          docker run -d --name flask-app -p 5000:5000 ${DockerImage}
 
 Outputs:
   PublicIP:
