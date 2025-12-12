@@ -24,30 +24,30 @@ Resources:
           ToPort: 5000
           CidrIp: 0.0.0.0/0
 
-EC2Role:
-  Type: AWS::IAM::Role
-  Properties:
-    AssumeRolePolicyDocument:
-      Version: '2012-10-17'
-      Statement:
-        - Effect: Allow
-          Principal:
-            Service: ec2.amazonaws.com
-          Action: sts:AssumeRole
-    ManagedPolicyArns:
-      - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+  EC2Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
 
-EC2InstanceProfile:
-  Type: AWS::IAM::InstanceProfile
-  Properties:
-    Roles:
-      - !Ref EC2Role
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref EC2Role
 
   FlaskInstance:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-0e2c8caa4b6378d8c  # Ubuntu 22.04 (update if needed)
+      ImageId: ami-0e2c8caa4b6378d8c # Ubuntu 22.04
       KeyName: !Ref KeyName
       IamInstanceProfile: !Ref EC2InstanceProfile
       SecurityGroupIds:
@@ -60,8 +60,8 @@ EC2InstanceProfile:
           systemctl start docker
           systemctl enable docker
 
-         # Login to ECR
-          aws ecr get-login-password --region ${AWS_REGION} | docker login --username Jenkins2  --password-stdin ${DockerImage%/*}
+          # Login to ECR
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${DockerImage%/*}
 
           # Pull and run Docker image
           docker stop flask-app || true
