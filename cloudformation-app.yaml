@@ -8,6 +8,10 @@ Parameters:
   DockerImage:
     Type: String
 
+
+  ECRRegistry:
+    Type: String
+
 Resources:
 
   FlaskSecurityGroup:
