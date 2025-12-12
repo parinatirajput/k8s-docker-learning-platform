@@ -51,7 +51,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-0e2c8caa4b6378d8c # Ubuntu 22.04
+      ImageId: ami-068c0051b15cdb816  # Ubuntu 22.04
       KeyName: !Ref KeyName
       IamInstanceProfile: !Ref EC2InstanceProfile
       SecurityGroupIds:
@@ -59,8 +59,7 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
-          apt update -y
-          apt install -y docker.io awscli
+          yum install -y docker awscli
           systemctl start docker
           systemctl enable docker
 
